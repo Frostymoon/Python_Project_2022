@@ -1,0 +1,3 @@
+Hello friend! Glad to see you have made it this far. Take a seat and hear my tale.
+This is a sample text for my end of course Python project.
+Please be patient with me, I have accute fuck-its.
