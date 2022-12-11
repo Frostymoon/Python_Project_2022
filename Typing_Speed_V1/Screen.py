@@ -1,8 +1,7 @@
-from argparse import Namespace
 import curses
 import random
 
-class Viewer:
+class Screen:
     sample_text = ''
 
     def __init__(self):

@@ -1,7 +1,7 @@
 from Stopwatch import *
-from Viewer import *
+from Screen import *
 
-def wpm_calc(terminal_scr, test_view: Viewer):
+def wpm_calc(terminal_scr, test_view: Screen):
     sample_text = test_view.sample_text
     current_text = []
     wpm = 0
