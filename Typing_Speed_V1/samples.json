@@ -1,0 +1,21 @@
+{ "1" :{  
+    "noob1": "Hello friend! Glad to see you have made it this far. Take a seat and hear my tale.",
+    "noob2": "I am a teeny tiny coder person and I think that i should improve my typing speed.",
+    "noob3": "My fingers get tied in a knot whenever I try to type really fast and I accidentally press too many keys."
+},
+"2":{
+    "decent1" : "The action of unintentionally typing characters in a sentence is called fat-fingering.",
+    "decent2" : "I have typed on a keyboard for a long time and can now occasionally do it without looking.",
+    "decent3" : "Nevertheless we are all human and we spend most of or lives learning and evolving. And sleeping for whatever reason."
+},
+"3" : {
+    "good1" : "Cramming hours and sleepless nights are a well-known part of the studying ritual of all procastinators.",
+    "good2" : "5 AM, blinds closed, mind torn asunder, eyes blood-shot and dopamine running low, the student strugges to calcullate 2+3.",
+    "good3" : "Thinking back to the days when World of Warcraft was all the rage, I realize times were simpler and responsabilities were few and ignored."
+},
+"4" : {
+    "god1" : "We present calculations of ultraviolet spectra resulting from the scattering of photons by gas infalling onto an isotropically emitting source of radiation.",
+    "god2" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "god3" : ">+++++++++[<++++++++>-]<.>+++++++[<++++>-]<+.+++++++..+++.[-]"
+}
+}

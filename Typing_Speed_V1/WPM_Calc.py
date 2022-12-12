@@ -1,6 +1,7 @@
 from Stopwatch import *
 from Screen import *
 
+
 def wpm_calc(terminal_scr, test_view: Screen):
     sample_text = test_view.sample_text
     current_text = []
@@ -26,10 +27,10 @@ def wpm_calc(terminal_scr, test_view: Screen):
         except:
             continue
 
-        if ord(key) == 27:
+        if ord(key) == 27:  # escape key
             break
 
-        if ord(key) == 8:
+        if ord(key) == 8:   # backspace bey
             if len(current_text) > 0:
                 current_text.pop()
         elif len(current_text) < len(sample_text):
