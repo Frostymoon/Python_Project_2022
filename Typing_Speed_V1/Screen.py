@@ -47,7 +47,7 @@ class Screen:
 #         terminal_scr.addstr("""That wasn't the ANY key...")
 # You know what, it's fine. Let's just get this started.""")
     
-                
+# todo figure out how to pass Scoring.difficulty instead of 1 in chosen_difficulty
     def TextSampler(self):
         with open(ROOT / 'samples.json', 'r') as file:
             lines = json.load(file)

@@ -1,5 +1,5 @@
 import Screen
-
+# fixme code runs twice and i have no idea how / why
 def difficulty_check():
     difficulty = "input('How good are you?\n')"
     match difficulty:
