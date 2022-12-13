@@ -1,8 +1,9 @@
 import curses
 from msvcrt import getch
-import random
-import json
 import pathlib
+from Data import *
+
+
 ROOT = pathlib.Path(__file__).parent
 
 
@@ -10,13 +11,15 @@ class Screen:
     sample_text = ''
     difficulty = ""
     terminal_scr = ''
+    data: Data
 
-    def __init__(self, terminal_scr):
+    def __init__(self, terminal_scr, data: Data):
+        self.data = data
         self.terminal_scr = terminal_scr
         curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
         curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
         curses.init_pair(3, curses.COLOR_WHITE, curses.COLOR_BLACK)
-        
+
 # todo clean code and put difficulty_check method in its own module
 # todo put all textx in a separate json and put in in a separate class
     def difficulty_check(self):
@@ -27,7 +30,9 @@ class Screen:
         3. Pretty good.
         4. Keyboard GOD!\n""")
         self.difficulty = self.terminal_scr.getkey()
+        self.data.setGameplayText(self.difficulty)
         self.terminal_scr.clear()
+        
         match self.difficulty:
             case "1":
                 self.terminal_scr.addstr(
@@ -45,7 +50,6 @@ class Screen:
                 self.terminal_scr.addstr(
                     "?. Started strong right out the gates, huh... How 'bout you give it another go.")
                 self.difficulty_check()
-        self.sample_text = self.TextSampler()
         self.terminal_scr.getch()
 
     def starting_message(self):
@@ -55,34 +59,28 @@ class Screen:
             "\nFeel at ease using our 'Applicant Skill Screener', used by Bing.")
         self.terminal_scr.refresh()
         self.terminal_scr.getkey()
-        self.terminal_scr.clear()
 
-# todo figure out how to pass Scoring.difficulty instead of 1 in chosen_difficulty
-    def TextSampler(self):
-        # todo separation of data (json oppening in a class or w/e and set the data top a variable to use later)
-        with open(ROOT / 'samples.json', 'r') as file:
-            lines = json.load(file)
-            chosen_difficulty = random.choice(list(lines[self.difficulty]))
-        return (lines[self.difficulty][chosen_difficulty])
-    
     def end_screen(self):
-        self.terminal_scr.clear()
-        self.terminal_scr.addstr("""Nicely done! Would you like to go again?
-                                 y/n""")
+
+        self.terminal_scr.addstr("""\nNicely done! Would you like to go again?
+        y/n""")
         key_press = self.terminal_scr.getkey()
         match key_press.lower():
             case "y":
-                self.difficulty()
+                # self.terminal_scr.
+                self.terminal_scr.clear()
+                self.difficulty_check()
             case "n":
                 self.terminal_scr.addstr("Well OK then. Enter your name: \n ")
                 user_name = self.terminal_scr.getkey()
             case _:
-                self.terminal_scr.addstr("Bruh... Testing is over you can relax.\n PLAY AGAIN?!")
+                self.terminal_scr.addstr(
+                    "Bruh... Testing is over you can relax.\n PLAY AGAIN?!")
+                self.terminal_scr.refresh()
+                self.terminal_scr.clear()
                 self.end_screen()
-        
     # def data_storage():
-        
-    
+
     def display_wpm(self, terminal_scr, sample, current, wpm):
         terminal_scr.addstr(sample)
         terminal_scr.addstr(1, 0, f"WPM: {wpm}")
