@@ -11,7 +11,7 @@ class Wpm:
     def __init__(self, data: Data):
         self.loadedData = data
 
-    def wpm_calc(self, terminal_scr, test_view: Screen):
+    def wpm_calc(self, terminal_scr, test_view: Screen) -> bool:
         self.initData()
         # todo see if you can switch from the time thing to a spotwatch of sorts
         terminal_scr.nodelay(True)
@@ -24,12 +24,7 @@ class Wpm:
             terminal_scr.clear()
             test_view.display_wpm(terminal_scr, self.sample_text, self.current_text, wpm)
             terminal_scr.refresh()
-
-            if "".join(self.current_text) == self.sample_text:
-                terminal_scr.nodelay(False)
-                test_view.end_screen()
-                self.initData()
-
+            
             try:
                 key = terminal_scr.getkey()
             except:
@@ -44,7 +39,11 @@ class Wpm:
                     self.current_text.pop()
             elif len(self.current_text) < len(self.sample_text):
                 self.current_text.append(key)
-
+                
+            if "".join(self.current_text) == self.sample_text:
+                #store end data
+                return True
+    
     def initData(self):
         self.current_text = []
         self.wpm = 0

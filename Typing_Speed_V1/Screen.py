@@ -50,7 +50,9 @@ class Screen:
                 self.terminal_scr.addstr(
                     "?. Started strong right out the gates, huh... How 'bout you give it another go.")
                 self.difficulty_check()
+                return None               
         self.terminal_scr.getch()
+        return self.difficulty
 
     def starting_message(self):
         self.terminal_scr.clear()
@@ -60,7 +62,7 @@ class Screen:
         self.terminal_scr.refresh()
         self.terminal_scr.getkey()
 
-    def end_screen(self):
+    def end_screen(self)->bool:
 
         self.terminal_scr.addstr("""\nNicely done! Would you like to go again?
         y/n""")
@@ -70,15 +72,19 @@ class Screen:
                 # self.terminal_scr.
                 self.terminal_scr.clear()
                 self.difficulty_check()
+                return True
+                # check if
             case "n":
                 self.terminal_scr.addstr("Well OK then. Enter your name: \n ")
                 user_name = self.terminal_scr.getkey()
+                return False
             case _:
                 self.terminal_scr.addstr(
                     "Bruh... Testing is over you can relax.\n PLAY AGAIN?!")
                 self.terminal_scr.refresh()
                 self.terminal_scr.clear()
                 self.end_screen()
+                return None
     # def data_storage():
 
     def display_wpm(self, terminal_scr, sample, current, wpm):

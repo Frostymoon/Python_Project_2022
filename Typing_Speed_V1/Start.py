@@ -1,0 +1,3 @@
+class Start:
+    def caca():
+        
