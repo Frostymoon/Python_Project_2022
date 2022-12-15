@@ -1,4 +1,5 @@
 from Screen import *
+import SaveManager
 from SaveManager import *
 from WPM_Calc import Wpm
 
@@ -7,10 +8,8 @@ class Gameflow:
     Screen_insance: Screen
     wpm: Wpm
     terminal_scr = ""
-    save_manager : SaveManager
 
     def __init__(self, Screen_insance: Screen, wpm: Wpm, terminal_scr):
-        self.save_manager = SaveManager()
         self.Screen_insance = Screen_insance
         self.terminal_scr = terminal_scr
         self.wpm = wpm
@@ -34,6 +33,6 @@ class Gameflow:
             # save data
             self.Start()
         else:
-            self.save_manager.save_data("muie", 45, 45, 45, "hord")
+            SaveManager.save_user_data()
             exit()
             # quit and save data

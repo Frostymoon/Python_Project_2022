@@ -13,4 +13,5 @@ def main(terminal_scr):
     gameflow = Gameflow(Screen_insance, wpm, terminal_scr)
 
 
+
 wrapper(main)
