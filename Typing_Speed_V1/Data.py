@@ -9,9 +9,9 @@ class Data:
     __currently_selected_text = ''
 
     def __init__(self):
-        self.loadJson()
+        self.load_json()
 
-    def loadJson(self):
+    def load_json(self):
         with open(ROOT / 'samples.json', 'r') as file:
             self.the_json = json.load(file)
 
@@ -22,7 +22,7 @@ class Data:
         value = random.choice(list(self.get_difficulty_data(key)))
         return self.the_json[key][value]
 
-    def setGameplayText(self, key: str):
+    def set_gameplay_text(self, key: str):
         self.__currently_selected_text = self.get_random_text(key)
 
     def get_currently_selected_text(self):

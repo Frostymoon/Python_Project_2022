@@ -1,11 +1,6 @@
 import curses
 from msvcrt import getch
-import pathlib
 from Data import *
-
-
-ROOT = pathlib.Path(__file__).parent
-
 
 class Screen:
     sample_text = ''
@@ -30,7 +25,7 @@ class Screen:
         3. Pretty good.
         4. Keyboard GOD!\n""")
         self.difficulty = self.terminal_scr.getkey()
-        self.data.setGameplayText(self.difficulty)
+        self.data.set_gameplay_text(self.difficulty)
         self.terminal_scr.clear()
         
         match self.difficulty:
@@ -64,17 +59,17 @@ class Screen:
 
     def end_screen(self)->bool:
 
-        self.terminal_scr.addstr("""\nNicely done! Would you like to go again?
-        y/n""")
+        self.terminal_scr.addstr(2, 0, "Nicely done! Would you like to go again?")
+        self.terminal_scr.addstr(3, 0, "y/n")
         key_press = self.terminal_scr.getkey()
         match key_press.lower():
             case "y":
                 # self.terminal_scr.
                 self.terminal_scr.clear()
-                self.difficulty_check()
                 return True
                 # check if
             case "n":
+                self.terminal_scr.clear()
                 self.terminal_scr.addstr("Well OK then. Enter your name: \n ")
                 user_name = self.terminal_scr.getkey()
                 return False

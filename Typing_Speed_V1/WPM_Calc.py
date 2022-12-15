@@ -12,7 +12,7 @@ class Wpm:
         self.loadedData = data
 
     def wpm_calc(self, terminal_scr, test_view: Screen) -> bool:
-        self.initData()
+        self.init_data()
         # todo see if you can switch from the time thing to a spotwatch of sorts
         terminal_scr.nodelay(True)
         watchstopped = Stopwatch()
@@ -36,7 +36,7 @@ class Wpm:
 
             if ord(key) == 8:   # backspace key
                 if len(self.current_text) > 0:
-                    self.current_text.pop()
+                    deleted_char = self.current_text.pop()
             elif len(self.current_text) < len(self.sample_text):
                 self.current_text.append(key)
                 
@@ -44,7 +44,7 @@ class Wpm:
                 #store end data
                 return True
     
-    def initData(self):
+    def init_data(self):
         self.current_text = []
         self.wpm = 0
         self.sample_text = self.loadedData.get_currently_selected_text()

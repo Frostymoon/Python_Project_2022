@@ -11,7 +11,6 @@ def main(terminal_scr):
     Screen_insance = Screen(terminal_scr, loadedData)
     wpm = Wpm(loadedData)
     gameflow = Gameflow(Screen_insance, wpm, terminal_scr)
-    gameflow.Start()
 
 
 wrapper(main)
