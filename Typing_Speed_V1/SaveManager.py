@@ -1,14 +1,58 @@
 import json
 from json import JSONEncoder
 import pathlib
+import os
 ROOT = pathlib.Path(__file__).parent
 
+user_name = ''
+current_round = 1
+current_wpm = 0
+current_score = 0
+current_difficulty = ''
+current_deleted_characters = []
 
-def save_user_data(user_name: str, current_round: int, current_wpm: int, current_score: int, current_difficulty: str, current_deleted_characters: list):
-    round = Round(current_round, current_wpm, current_score,
+
+def set_user_name(name: str):
+    global user_name
+    user_name = name
+
+
+def set_current_round(round: int):
+    global current_round
+    current_round = round + 1
+
+
+def set_current_wpm(wpm: int):
+    global current_wpm
+    current_wpm = wpm
+
+
+def set_current_score(score: int):
+    global current_score
+    current_score = score
+
+
+def set_current_difficulty(difficulty: str):
+    global current_difficulty
+    current_difficulty = difficulty
+
+
+def set_deleted_characters(deleted_characters: list):
+    global current_deleted_characters
+    current_deleted_characters = deleted_characters
+
+
+def save_user_data():
+    round = Round(current_round, current_wpm, 0,
                   current_difficulty, current_deleted_characters)
     user = Player(user_name, [round])
     create_json(user)
+
+
+def save_round_data():
+    round = Round(current_round, current_wpm, 0,
+                  current_difficulty, current_deleted_characters)
+    return round
 
 
 def save_deleted_chars(self, x):
@@ -16,19 +60,31 @@ def save_deleted_chars(self, x):
 
 
 def create_json(user_data):
-    player_data = json.dumps(user_data, indent=4, cls=PlayerEncoder)
-    with open("user_data.json", "w") as file:
-        file.write(player_data)
+    json_path = os.path.exists(ROOT / f"{user_name}.json")
+    if json_path:
+        loaded_user = load_json()
+        set_current_round(len(loaded_user.rounds))
+        loaded_user.rounds.append(save_round_data())
+        player_data = json.dumps(loaded_user, indent=4, cls=PlayerEncoder)
+        with open(ROOT / f"{user_name}.json", "w") as file:
+            file.write(player_data)
+    else:
+        player_data = json.dumps(user_data, indent=4, cls=PlayerEncoder)
+        with open(ROOT / f"{user_name}.json", "w") as file:
+            file.write(player_data)
+
+    file.close()
 
 
 def load_json():
-    with open(ROOT / "user_data.json", 'r') as file:
+    with open(ROOT / f"{user_name}.json", "r") as file:
         user = Player(**json.loads(file.read()))
         
         for index, item in enumerate(user.rounds):
             temp_json = json.dumps(item, indent=4)
             temp = Round(**json.loads(temp_json))
             user.rounds[index] = temp
+
         return user
 
 

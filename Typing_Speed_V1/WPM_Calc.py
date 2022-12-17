@@ -7,6 +7,7 @@ class Wpm:
     sample_text = ""
     current_text = []
     wpm = 0
+    deleted_char = []
 
     def __init__(self, data: Data):
         self.loadedData = data
@@ -20,7 +21,8 @@ class Wpm:
         while True:
 
             wpm = watchstopped.time_calc(self.current_text)
-
+            # self.wpm_list.append(wpm)
+            
             terminal_scr.clear()
             test_view.display_wpm(terminal_scr, self.sample_text, self.current_text, wpm)
             terminal_scr.refresh()
@@ -36,15 +38,22 @@ class Wpm:
 
             if ord(key) == 8:   # backspace key
                 if len(self.current_text) > 0:
-                    deleted_char = self.current_text.pop()
+                    self.deleted_char.append(self.current_text.pop())
             elif len(self.current_text) < len(self.sample_text):
                 self.current_text.append(key)
                 
             if "".join(self.current_text) == self.sample_text:
                 #store end data
+                # self.final_wpm = self.wpm
+                SaveManager.set_current_wpm(wpm)
+                SaveManager.set_deleted_characters(self.deleted_char)
                 return True
+            
+    # def get_final_wpm(self):
+    #     self.final_wpm = self.wpm_list.pop()
     
     def init_data(self):
         self.current_text = []
         self.wpm = 0
+        self.wpm_list = []
         self.sample_text = self.loadedData.get_currently_selected_text()

@@ -1,15 +1,12 @@
 {
-    "user_name": "ASS",
+    "user_name": "muiecaca",
     "rounds": [
         {
-            "round_number": 1,
-            "last_wpm": 45,
-            "score": 45,
-            "selected_difficulty": "noob",
-            "deleted_chars": [
-                "a",
-                "b"
-            ]
+            "round_number": 0,
+            "last_wpm": 20,
+            "score": 0,
+            "selected_difficulty": "1",
+            "deleted_chars": []
         }
     ]
 }

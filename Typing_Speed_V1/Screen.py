@@ -1,6 +1,7 @@
 import curses
-from msvcrt import getch
+import SaveManager
 from Data import *
+
 
 class Screen:
     sample_text = ''
@@ -27,7 +28,7 @@ class Screen:
         self.difficulty = self.terminal_scr.getkey()
         self.data.set_gameplay_text(self.difficulty)
         self.terminal_scr.clear()
-        
+
         match self.difficulty:
             case "1":
                 self.terminal_scr.addstr(
@@ -45,7 +46,7 @@ class Screen:
                 self.terminal_scr.addstr(
                     "?. Started strong right out the gates, huh... How 'bout you give it another go.")
                 self.difficulty_check()
-                return None               
+                return None
         self.terminal_scr.getch()
         return self.difficulty
 
@@ -57,21 +58,31 @@ class Screen:
         self.terminal_scr.refresh()
         self.terminal_scr.getkey()
 
-    def end_screen(self)->bool:
-
-        self.terminal_scr.addstr(2, 0, "Nicely done! Would you like to go again?")
+    def end_screen(self) -> bool:
+        user_name = ''
+        self.terminal_scr.nodelay(False)
+        self.terminal_scr.addstr(2, 0, "Nicely done! What do they call you?")
+        
+        while True:
+            inputed_character = self.terminal_scr.getkey()
+            if ord(inputed_character) == 10:
+                break
+            self.terminal_scr.addstr(inputed_character)
+            user_name += inputed_character
+        
+        SaveManager.set_user_name(user_name)
+        self.terminal_scr.clear()
+        self.terminal_scr.addstr(2, 0, "Would you like to go again?")
         self.terminal_scr.addstr(3, 0, "y/n")
         key_press = self.terminal_scr.getkey()
         match key_press.lower():
             case "y":
-                # self.terminal_scr.
                 self.terminal_scr.clear()
                 return True
                 # check if
             case "n":
                 self.terminal_scr.clear()
                 self.terminal_scr.addstr("Well OK then. Enter your name: \n ")
-                user_name = self.terminal_scr.getkey()
                 return False
             case _:
                 self.terminal_scr.addstr(
