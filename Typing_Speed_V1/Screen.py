@@ -16,8 +16,7 @@ class Screen:
         curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
         curses.init_pair(3, curses.COLOR_WHITE, curses.COLOR_BLACK)
 
-# todo clean code and put difficulty_check method in its own module
-# todo put all textx in a separate json and put in in a separate class
+# todo put all text in a separate json and put in in a separate class
     def difficulty_check(self):
         self.terminal_scr.clear()
         self.terminal_scr.addstr("""How good are you?\n
@@ -91,7 +90,6 @@ class Screen:
                 self.terminal_scr.clear()
                 self.end_screen()
                 return None
-    # def data_storage():
 
     def display_wpm(self, terminal_scr, sample, current, wpm):
         terminal_scr.addstr(sample)

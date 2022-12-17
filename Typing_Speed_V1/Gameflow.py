@@ -32,10 +32,8 @@ class Gameflow:
         SaveManager.set_current_difficulty(self.diff)
         if should_continue:
             SaveManager.save_user_data()
-            # save data
             self.Start()
         else:
             SaveManager.save_user_data()
-            # call create PDF, and in that thing open the right json with the user_name from the SaveManager
+            # todo call create PDF, and in that thing open the right json with the user_name from the SaveManager
             exit()
-            # quit and save data
