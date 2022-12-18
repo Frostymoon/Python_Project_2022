@@ -33,7 +33,9 @@ class Wpm:
             except:
                 continue
 
-            # todo fix keys err in terminal
+            if len(key) > 1:
+                continue
+            
             if ord(key) == 27:  # escape key
                 break
 
