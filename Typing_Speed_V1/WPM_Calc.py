@@ -9,7 +9,7 @@ class Wpm:
     current_text = []
     wpm = 0
     deleted_char = []
-    # accuracy = 0
+    accuracy = int()
 
     def __init__(self, data: Data):
         self.loadedData = data
@@ -19,10 +19,7 @@ class Wpm:
         terminal_scr.nodelay(True)
         watchstopped = Stopwatch()
         # fixme len(self.deleted_char) is returning 0, even when list is populated
-        # length_deleted_chars = len(self.deleted_char)
-        # length_sample_text = len(self.sample_text)
-        # self.accuracy = 100 - \
-        #     ((length_deleted_chars * 100) / length_sample_text)
+
         while True:
 
             wpm = watchstopped.time_calc(self.current_text)
@@ -41,7 +38,7 @@ class Wpm:
             if ord(key) == 27:  # escape key
                 break
 
-            if ord(key) == 8 :   # backspace key
+            if ord(key) == 8:   # backspace key
                 if len(self.current_text) > 0:
                     self.deleted_char.append(self.current_text.pop())
             elif len(self.current_text) < len(self.sample_text):
@@ -51,8 +48,15 @@ class Wpm:
 
                 SaveManager.set_current_wpm(wpm)
                 SaveManager.set_deleted_characters(self.deleted_char)
-                # SaveManager.set_current_accuracy(self.accuracy)
+                SaveManager.set_current_accuracy(self.accuracy_update())
                 return True
+
+    def accuracy_update(self):
+        length_deleted_chars = len(self.deleted_char)
+        length_sample_text = len(self.sample_text)
+        self.accuracy = abs(
+            100 - (length_deleted_chars / length_sample_text) * 100)
+        return self.accuracy
 
     def init_data(self):
         self.current_text = []
