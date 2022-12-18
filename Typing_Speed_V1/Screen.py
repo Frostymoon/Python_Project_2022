@@ -71,18 +71,20 @@ class Screen:
         SaveManager.set_user_name(user_name)
         self.terminal_scr.clear()
         self.terminal_scr.addstr(2, 0, "Would you like to go again?")
-        self.terminal_scr.addstr(3, 0, "y/n")
+        self.terminal_scr.addstr(3, 0, "y/n\n")
         key_press = self.terminal_scr.getkey()
+        
         match key_press.lower():
             case "y":
                 self.terminal_scr.clear()
                 return True
                 # check if
             case "n":
-                return False
+                        return False
             case _:
                 self.terminal_scr.addstr(
-                    "Bruh... Testing is over you can relax.\n PLAY AGAIN?!")
+                    "Bruh... Testing is over you can relax.\n")
+                self.terminal_scr.getkey()
                 self.terminal_scr.refresh()
                 self.terminal_scr.clear()
                 self.end_screen()

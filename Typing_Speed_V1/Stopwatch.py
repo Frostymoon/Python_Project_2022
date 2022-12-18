@@ -7,7 +7,6 @@ class Stopwatch:
         self.start_time = time.time()
 
     def GetTimeElapsed(self):
-        # exp am facut cu max si 1 ca sa evitam posibilitatea de 0 division
         time_elapsed = max(time.time() - self.start_time, 1)
         return time_elapsed
 

@@ -18,7 +18,6 @@ class Wpm:
         self.init_data()
         terminal_scr.nodelay(True)
         watchstopped = Stopwatch()
-        # fixme len(self.deleted_char) is returning 0, even when list is populated
 
         while True:
 
@@ -54,7 +53,7 @@ class Wpm:
     def accuracy_update(self):
         length_deleted_chars = len(self.deleted_char)
         length_sample_text = len(self.sample_text)
-        self.accuracy = abs(
+        self.accuracy = round(
             100 - (length_deleted_chars / length_sample_text) * 100)
         return self.accuracy
 

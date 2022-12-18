@@ -94,20 +94,20 @@ def load_json():
 
         return user
 
-def json_2_pdf(user_name):
-    with open(f'{user_name}', 'r') as f:
+def json_2_pdf():
+    with open(ROOT / f'{user_name}.json', 'r') as f:
         data = json.load(f)
 
-    string_value = data['user_name']
+    name = data['user_name']
     dictionaries_list = data['rounds']
 
     pdf = FPDF()
 
     pdf.add_page()
 
-    pdf.set_font('Arial', 'B', 16)
+    pdf.set_font('Arial', 'B', 12)
 
-    pdf.cell(0, 10, txt=string_value)
+    pdf.cell(0, 10, txt=name)
 
     pdf.ln()
 
@@ -116,7 +116,7 @@ def json_2_pdf(user_name):
             pdf.cell(0, 10, txt='{}: {}'.format(key, value))
             pdf.ln()
 
-    pdf.output(f'{user_name}', 'F')
+    pdf.output(f'{user_name}.pdf', 'F')
 
 class Player:
     user_name = ""

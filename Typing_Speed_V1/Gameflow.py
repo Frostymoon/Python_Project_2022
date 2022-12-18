@@ -35,5 +35,5 @@ class Gameflow:
             self.Start()
         else:
             SaveManager.save_user_data()
-            # todo call create PDF, and in that thing open the right json with the user_name from the SaveManager
+            SaveManager.json_2_pdf()
             exit()
