@@ -16,7 +16,6 @@ class Screen:
         curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
         curses.init_pair(3, curses.COLOR_WHITE, curses.COLOR_BLACK)
 
-# todo put all text in a separate json and put in in a separate class
     def difficulty_check(self):
         self.terminal_scr.clear()
         self.terminal_scr.addstr("""How good are you?\n
@@ -60,7 +59,7 @@ class Screen:
     def end_screen(self) -> bool:
         user_name = ''
         self.terminal_scr.nodelay(False)
-        self.terminal_scr.addstr(2, 0, "Nicely done! What do they call you?")
+        self.terminal_scr.addstr(2, 0, "Nicely done! What do they call you?\n")
         
         while True:
             inputed_character = self.terminal_scr.getkey()
@@ -80,8 +79,6 @@ class Screen:
                 return True
                 # check if
             case "n":
-                self.terminal_scr.clear()
-                self.terminal_scr.addstr("Well OK then. Enter your name: \n ")
                 return False
             case _:
                 self.terminal_scr.addstr(
@@ -94,6 +91,7 @@ class Screen:
     def display_wpm(self, terminal_scr, sample, current, wpm):
         terminal_scr.addstr(sample)
         terminal_scr.addstr(1, 0, f"WPM: {wpm}")
+        SaveManager.set_current_score(wpm * int(self.difficulty))
 
         for i, char in enumerate(current):
             correct_char = sample[i]

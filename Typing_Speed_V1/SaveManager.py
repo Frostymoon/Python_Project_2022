@@ -8,6 +8,7 @@ user_name = ''
 current_round = 1
 current_wpm = 0
 current_score = 0
+current_accuracy = 0
 current_difficulty = ''
 current_deleted_characters = []
 
@@ -31,6 +32,11 @@ def set_current_score(score: int):
     global current_score
     current_score = score
 
+def set_current_accuracy(accuracy):
+    global current_accuracy
+    current_accuracy = accuracy
+    
+    
 
 def set_current_difficulty(difficulty: str):
     global current_difficulty
@@ -43,14 +49,14 @@ def set_deleted_characters(deleted_characters: list):
 
 
 def save_user_data():
-    round = Round(current_round, current_wpm, 0,
+    round = Round(current_round, current_wpm, current_score, current_accuracy,
                   current_difficulty, current_deleted_characters)
     user = Player(user_name, [round])
     create_json(user)
 
 
 def save_round_data():
-    round = Round(current_round, current_wpm, 0,
+    round = Round(current_round, current_wpm, current_score,current_accuracy,
                   current_difficulty, current_deleted_characters)
     return round
 
@@ -86,6 +92,7 @@ def load_json():
             user.rounds[index] = temp
 
         return user
+    
 
 
 class Player:
@@ -101,13 +108,15 @@ class Round:
     round_number = 0
     last_wpm = int()
     score = int()
+    accuracy = int()
     selected_difficulty = ""
     deleted_chars = []
 
-    def __init__(self, round_number, last_wpm, score, selected_difficulty, deleted_chars):
+    def __init__(self, round_number, last_wpm, score, accuracy, selected_difficulty, deleted_chars):
         self.round_number = round_number
         self.last_wpm = last_wpm
         self.score = score
+        self.accuracy = accuracy
         self.selected_difficulty = selected_difficulty
         self.deleted_chars = deleted_chars
 
