@@ -84,6 +84,16 @@ def create_json(user_data):
 
 
 def load_json():
+    """deserializare de json.
+        user este un obiect de tip Player. in () ne folosim de **kwargs ca sa parsam keys din dictionarul 'file' cu numele user_name si rounds direct in obiectul user
+        datorita lui enumerate(), for index, item se refera la INDEX si nu la key.
+        temp_json e json temporar in care tinem doar items
+        temp e un obiect de tip Rounds in care folosim **kwargs ca sa parsam valorile variabilelor din json in variabilele din Rounds cu acelasi nume.
+        apoi temp il echivalam cu indexul ce il itereaza for loop in lista user.rounds
+        
+            Returns:
+        user: obiectul de tip Player ce este folosit in metoda save_user_data()
+    """
     with open(ROOT / f"{user_name}.json", "r") as file:
         user = Player(**json.loads(file.read()))
         
@@ -99,7 +109,7 @@ def json_2_pdf():
         data = json.load(f)
 
     name = data['user_name']
-    dictionaries_list = data['rounds']
+    user_rounds = data['rounds']
 
     pdf = FPDF()
 
@@ -111,11 +121,15 @@ def json_2_pdf():
 
     pdf.ln()
 
-    for d in dictionaries_list:
+    for d in user_rounds:
         for key, value in d.items():
+            if key == "round_number":
+                pdf.set_font('Arial', 'BI', 12)
+            else:
+                    pdf.set_font('Arial', 'B', 12)
             pdf.cell(0, 10, txt='{}: {}'.format(key, value))
             pdf.ln()
-
+                
     pdf.output(f'{user_name}.pdf', 'F')
 
 class Player:
@@ -143,7 +157,7 @@ class Round:
         self.selected_difficulty = selected_difficulty
         self.deleted_chars = deleted_chars
 
-
+# exp e o clasa facuta ca un template pentru JSONEncoder
 class PlayerEncoder(JSONEncoder):
     def default(self, o):
         return o.__dict__

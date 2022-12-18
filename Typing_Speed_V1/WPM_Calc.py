@@ -61,4 +61,6 @@ class Wpm:
         self.current_text = []
         self.wpm = 0
         self.wpm_list = []
+        self.deleted_char = []
+        self.accuracy = 0
         self.sample_text = self.loadedData.get_currently_selected_text()
