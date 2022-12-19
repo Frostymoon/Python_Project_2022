@@ -1,0 +1,15 @@
+{
+    "user_name": "alex",
+    "rounds": [
+        {
+            "round_number": 1,
+            "last_wpm": 5,
+            "score": 5,
+            "accuracy": 75,
+            "selected_difficulty": "1",
+            "deleted_chars": [
+                "a"
+            ]
+        }
+    ]
+}

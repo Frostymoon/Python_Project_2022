@@ -5,6 +5,9 @@ ROOT = pathlib.Path(__file__).parent
 
 
 class Data:
+    """
+    Scoate random text din json in functie de inputul playerului
+    """
     the_json = {}
     __currently_selected_text = ''
 

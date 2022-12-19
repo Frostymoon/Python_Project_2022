@@ -1,6 +1,5 @@
 from Stopwatch import *
 from Screen import *
-import curses
 
 
 class Wpm:

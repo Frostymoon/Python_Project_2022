@@ -33,11 +33,11 @@ def set_current_score(score: int):
     global current_score
     current_score = score
 
+
 def set_current_accuracy(accuracy):
     global current_accuracy
     current_accuracy = accuracy
-    
-    
+
 
 def set_current_difficulty(difficulty: str):
     global current_difficulty
@@ -57,7 +57,7 @@ def save_user_data():
 
 
 def save_round_data():
-    round = Round(current_round, current_wpm, current_score,current_accuracy,
+    round = Round(current_round, current_wpm, current_score, current_accuracy,
                   current_difficulty, current_deleted_characters)
     return round
 
@@ -90,19 +90,20 @@ def load_json():
         temp_json e json temporar in care tinem doar items
         temp e un obiect de tip Rounds in care folosim **kwargs ca sa parsam valorile variabilelor din json in variabilele din Rounds cu acelasi nume.
         apoi temp il echivalam cu indexul ce il itereaza for loop in lista user.rounds
-        
+
             Returns:
         user: obiectul de tip Player ce este folosit in metoda save_user_data()
     """
     with open(ROOT / f"{user_name}.json", "r") as file:
         user = Player(**json.loads(file.read()))
-        
+
         for index, item in enumerate(user.rounds):
             temp_json = json.dumps(item, indent=4)
             temp = Round(**json.loads(temp_json))
             user.rounds[index] = temp
 
         return user
+
 
 def json_2_pdf():
     with open(ROOT / f'{user_name}.json', 'r') as f:
@@ -126,11 +127,12 @@ def json_2_pdf():
             if key == "round_number":
                 pdf.set_font('Arial', 'BI', 12)
             else:
-                    pdf.set_font('Arial', 'B', 12)
+                pdf.set_font('Arial', 'B', 12)
             pdf.cell(0, 10, txt='{}: {}'.format(key, value))
             pdf.ln()
-                
+
     pdf.output(f'{user_name}.pdf', 'F')
+
 
 class Player:
     user_name = ""
@@ -158,6 +160,8 @@ class Round:
         self.deleted_chars = deleted_chars
 
 # exp e o clasa facuta ca un template pentru JSONEncoder
+
+
 class PlayerEncoder(JSONEncoder):
     def default(self, o):
         return o.__dict__

@@ -63,7 +63,7 @@ class Screen:
         
         while True:
             inputed_character = self.terminal_scr.getkey()
-            if ord(inputed_character) == 10:
+            if ord(inputed_character) == 10: # enter
                 break
             self.terminal_scr.addstr(inputed_character)
             user_name += inputed_character
@@ -80,7 +80,7 @@ class Screen:
                 return True
                 # check if
             case "n":
-                        return False
+                return False
             case _:
                 self.terminal_scr.addstr(
                     "Bruh... Testing is over you can relax.\n")
@@ -91,6 +91,15 @@ class Screen:
                 return None
 
     def display_wpm(self, terminal_scr, sample, current, wpm):
+        """displays the words per minute and saves it in the SaveManager.set_current_score()
+        for loop compara caracterul scris de player cu caracterul de pe aceeasi pozitie din sample text. imput corect = verde; imput incorect = rosu
+
+        Args:
+            terminal_scr: terminal screen
+            sample (string): sample text
+            current (list): textul ce este scris de user
+            wpm (int): wpm
+        """
         terminal_scr.addstr(sample)
         terminal_scr.addstr(1, 0, f"WPM: {wpm}")
         SaveManager.set_current_score(wpm * int(self.difficulty))
