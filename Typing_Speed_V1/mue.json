@@ -1,0 +1,17 @@
+{
+    "user_name": "mue",
+    "rounds": [
+        {
+            "round_number": 1,
+            "last_wpm": 36,
+            "score": 36,
+            "accuracy": 96,
+            "selected_difficulty": "1",
+            "deleted_chars": [
+                "t",
+                "p",
+                "k"
+            ]
+        }
+    ]
+}
